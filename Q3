@@ -1,0 +1,44 @@
+semi_annual_raise = 0.07
+r = 0.04
+r_monthly = r/12
+down_payment = 250000
+
+salary = int(input("Enter starting salary "))
+
+def binary_search():
+
+  global salary, r_monthly
+
+  low = 0
+  high = 10000
+
+  while low <= high:
+    mid = (low + high) // 2
+
+    months = 0
+    percent_saved = mid / 10000
+    temp_salary = int(salary)
+    crt_savings = 0
+
+    while months < 36:
+      months += 1
+      crt_savings *= (1 + r_monthly)
+      crt_savings += percent_saved * temp_salary / 12
+      semi_ann = months/6
+      if semi_ann.is_integer() == True:
+        temp_salary *= (1+semi_annual_raise)
+
+    final_savings = int(crt_savings)
+    print("percent_saved:", percent_saved, "final_savings:", final_savings)
+
+    if 249900 <= final_savings <= 250100:
+      return percent_saved
+    elif final_savings < 249900:
+      low = mid+1
+    else:
+      high = mid-1
+
+  return None
+
+result = binary_search()
+print("Best savings rate:", result)
