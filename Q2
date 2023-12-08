@@ -1,1 +1,26 @@
+echo "# IntroPython" >> README.md
+  git init
+  git add README.md
+  git commit -m "first commit"
+  git branch -M main
+  git remote add origin git@github.com:cderda/IntroPython.git
+  git push -u origin main
 
+annual_salary = int(input("Enter your annual salary "))
+monthly_salary = annual_salary / 12
+ps = float(input("Enter the percent of your salary to save, as a decimal "))
+semiann_raise = float(input("Enter the percent semi-annual raise, as a decimal "))
+total_cost = int(input("Enter the cost of your dream home "))
+down_payment = total_cost*0.25
+current_savings = 0
+months = 0
+r = 0.04
+r_monthly = r/12
+
+while current_savings < down_payment:
+  months+=1
+  current_savings *= (1+r_monthly)
+  current_savings += ps*monthly_salary
+  nbr_half_years = months//6
+  if nbr_half_years > (months-1)//6:
+    monthly_salary *= (1+semiann_raise)
